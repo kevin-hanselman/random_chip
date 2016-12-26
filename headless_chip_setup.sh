@@ -38,10 +38,16 @@ timedatectl set-ntp true
 apt-get update
 apt-get upgrade
 apt-get autoremove
-apt-get install ssh git gcc
+apt-get install ssh git gcc wireless-tools
 
 # for whatever reason, the CHIP's ssh keys need to be manually regenerated after installing ssh
 rm -v /etc/ssh/ssh_host_*
 dpkg-reconfigure openssh-server
+sed -i 's/PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
+
+# Turn of WiFi power management to reduce network errors
+# https://github.com/fordsfords/wlan_pwr
+wget -O /etc/network/if-up.d/wlan_pwr https://raw.githubusercontent.com/fordsfords/wlan_pwr/master/wlan_pwr
+chmod +x /etc/network/if-up.d/wlan_pwr
 
 echo 'Reboot when ready'
