@@ -40,4 +40,6 @@ sed -i 's/PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
 wget -O /etc/network/if-up.d/wlan_pwr https://raw.githubusercontent.com/fordsfords/wlan_pwr/master/wlan_pwr
 chmod +x /etc/network/if-up.d/wlan_pwr
 
+echo 'ALL : 192.168.' >> /etc/hosts.allow
+
 echo 'Reboot when ready'
